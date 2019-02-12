@@ -1,0 +1,28 @@
+//Christmas tree
+#include <stdio.h>
+int main () {
+
+    setvbuf(stdout, NULL, _IONBF, 0);
+
+    int row, n, b, space;
+    scanf ("%i", &row);
+    space = row;
+    for (n = 1; n <= row; n++){
+        space--;
+        for (b = 1; b <= space; b++){
+            printf(" ");
+        }
+        for (b = 1; b < n; b++){
+            printf ("%i", n);
+            printf(" ");
+        }
+        printf("%i", n);
+        for (b = 1; b <= space; b++){
+            printf(" ");
+        }
+        printf("\n");
+    }
+
+
+    return 0;
+}
