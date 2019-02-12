@@ -1,0 +1,24 @@
+// Task 2
+#include <stdio.h>
+#include <math.h>
+int main () {
+
+setvbuf(stdout, NULL, _IONBF, 0);
+
+double a, n;
+
+double sum = 0;
+
+printf("Enter a number for n: ");
+
+scanf ("%lf", &n);
+
+for (a=1; a <= n; a++)
+{
+    sum = sum + pow(1/a, a);
+    printf (" %g \n", pow(1/a, a));
+}
+printf("The sum is equal to %lf \n", sum);
+
+return 0;
+}
