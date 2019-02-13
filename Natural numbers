@@ -1,0 +1,18 @@
+// Task 1
+// Natural numbers
+# include <stdio.h>
+int main () {
+
+  setvbuf (stdout, NULL, _IONBF, 0);
+  printf ("The natural numbers are: ");
+  int a, sum = 0;
+  
+  for (a = 1; a <= 10; a++) {
+    sum = sum + a;
+  
+    printf ("%i ", a); 
+  }
+  
+  printf ("\nThe sum of 10 first natural numbers is: %i", sum);
+  return 0;
+}
