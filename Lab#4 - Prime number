@@ -1,0 +1,26 @@
+/*Prime number*/
+#include <stdio.h>
+int main () {
+
+    int x;
+    _Bool prime = 1;
+    
+    do {
+        printf("Please enter a number: ");
+        scanf("%i", &x);
+        if (x == 0){
+            prime = 0;
+        }
+            for (int i = x-1; i > 1; i--){
+            if (x%i == 0){
+                    break;
+            } else {
+                if (i == 2)
+                    printf ("It is a prime number!\n");
+                continue;
+            }
+        }
+
+    } while (prime == 1);
+    return 0;
+}
