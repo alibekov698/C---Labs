@@ -1,0 +1,14 @@
+/* User input*/
+#include <stdio.h>
+int main () {
+
+    int n, sum = 0;
+    do {
+        printf ("Please enter a number: ");
+        scanf ("%i", &n);
+        sum = sum + n;
+    }
+    while (sum <= 100);
+    printf("You entered %i, I am stopping the program, because the sum became %i (bigger than 100)", n, sum);
+    return 0;
+}
