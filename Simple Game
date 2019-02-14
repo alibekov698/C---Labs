@@ -1,0 +1,27 @@
+//Task 2: Simple Game
+#include <stdio.h>
+
+int main() {
+
+  char str;
+	int s, num;
+	_Bool a = 0, b = 1;
+
+	do {
+     printf("Please enter s or r: ");
+	   scanf("%c", &str);
+	  if (str == 'r') 
+    {
+	    num = rand();
+	    printf("You called the rand() function, it has generated the number: %i\n", num);
+	  }
+	  else if (str == 's') {
+		  printf("\nPlease enter an integer: ");
+	    scanf("%i", &s);
+	    num = srand(s);
+	    printf("\nYou called the srand() function, it has generated the number: %i\n", num);
+	  }
+	} while (a != b);
+  
+	return 0;
+}
