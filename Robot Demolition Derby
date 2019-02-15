@@ -1,0 +1,211 @@
+/* Task 3
+Robot Demolition Derby with Functions*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+typedef struct {
+    _Bool hasRobot; // 1 (true) a robot is here; 0 (false) the space is clear
+    int robHeading; // 0 (west), 1 (north), 2 (east), 3 (south)
+    _Bool robAlive; // 1 (true) for running robot; (false) when crashed
+} gridSquare;
+
+//TODO: implement the following functions
+
+void gridInz(int m, gridSquare grid[m][m]) {
+
+    int a, n, b;
+    for (a = 0; a < m; a++) {
+        for (n = 0; n < m; n++) {
+            grid[a][n].hasRobot = 0;
+        }
+    }
+};
+
+void copyGrid(int m, gridSquare grid[m][m]) {
+    int a, b, n;
+    for (a = 0, b = 0; a < m; a++) {
+        for (n =0 ; n < m; n++) {
+            if (grid[a][n].hasRobot == 1 && grid[a][n].robAlive == 1) {
+                if (grid[a][n].robHeading == 0) {
+                    printf("< ");
+                    }
+                else if (grid[a][n].robHeading == 1) {
+                    printf("^ ");
+                }
+                else if (grid[a][n].robHeading == 2) {
+                    printf("> ");
+                }
+                else if (grid[a][n].robHeading == 3) {
+                    printf("v ");
+                }
+            }
+            else if (grid[a][n].hasRobot == 1 && grid[a][n].robAlive == 0) {
+                printf("@ ");
+            } else {
+                printf(". ");
+                }
+        }
+        printf("\n");
+        b++;
+    }
+};
+
+void extraRobots(int number, int size, gridSquare grid[size][size]) {
+    int i, row, column;
+
+    for (i = 0; i < size; i++) {
+        do {
+            row = rand() % size;
+            column = rand() % size;
+        } while (grid[row][column].hasRobot);
+
+    grid[row][column].hasRobot = 1;
+    grid[row][column].robHeading = rand() % 4;
+    grid[row][column].robAlive = 1;
+    }
+};
+
+void turnLeft(int row, int column, int size, gridSquare grid[size][size]) {
+    if (grid[row][column].robHeading>0) {
+        grid[row][column].robHeading--;
+    }
+    else if (grid[row][column].robHeading == 0) {
+        grid[row][column].robHeading = 3;
+    }
+};
+
+void turnRight(int row, int column, int size, gridSquare grid[size][size]) {
+    if (grid[row][column].robHeading<3) {
+        grid[row][column].robHeading++;
+    }
+    else if (grid[row][column].robHeading == 3) {
+        grid[row][column].robHeading = 0;
+    }
+};
+
+//void moveForward(row, column, s, grid[s][s]);
+
+int main() {
+    setvbuf(stdout, NULL, _IONBF, 0);
+    int m = 10;
+    gridSquare grid[m][m];
+
+    // TODO: initialize the grid using the gridInit function defined above
+    gridInz(m, grid);
+
+
+    int row, column;
+    int number_of_robots = 10; //could be any number that can fit to the grid.
+
+     // Add 10 robots to the grid using a function
+    extraRobots(number_of_robots, m, grid);
+
+     // Counts the number of live robots
+    int liveCount = 10;
+
+     // main loop of the game
+    do {
+
+      // TODO: Output the grid using the printing function
+        copyGrid(m, grid);
+
+        char cmd;
+
+      // Obtain user input (move or rotate command)
+        printf("\n input action and coordinates, please: ");
+        scanf(" %c %i %i", &cmd, &row, &column);
+
+      // Process user command
+        if (grid[row][column].hasRobot && grid[row][column].robAlive) {
+
+            if (cmd == 'L') {
+                turnLeft(row, column, m, grid);
+
+            } else if (cmd == 'R') {
+                turnRight(row, column, m, grid);
+
+       } else if (cmd == 'F') {
+
+        // This attempts to move the robot forward, depending on the
+        // direction it is currently pointing
+        switch (grid[row][column].robHeading) {
+
+         case 0: // Pointing west
+          if (column > 0) {
+           // TODO: If a robot is in front of you, crash both;
+           // otherwise move the robot forward
+           if(grid[row][column - 1].hasRobot == 1){
+            grid[row][column - 1].robAlive = 0;
+            grid[row][column].robAlive = 0;
+            liveCount = liveCount - 2;
+           } else {
+              grid[row][column - 1].hasRobot = 1;
+              grid[row][column].hasRobot = 0;
+              grid[row][column - 1].robAlive = 1;
+              grid[row][column].robAlive = 0;
+              grid[row][column - 1].robHeading = 0;
+            }
+           }
+           break;
+         case 1: // Pointing north
+          if (row > 0) {
+             if(grid[row - 1][column].hasRobot == 1){
+              grid[row - 1][column].robAlive = 0;
+              grid[row][column].robAlive = 0;
+              liveCount = liveCount - 2;
+           } else {
+              grid[row - 1][column].hasRobot = 1;
+              grid[row][column].hasRobot = 0;
+              grid[row - 1][column].robAlive = 1;
+              grid[row][column].robAlive = 0;
+              grid[row - 1][column].robHeading = 1;
+           }
+          }
+           break;
+         case 2: // Pointing east
+          if (column < 9) {
+             if(grid[row][column + 1].hasRobot == 1){
+              grid[row][column + 1].robAlive = 0;
+              grid[row][column].robAlive = 0;
+              liveCount = liveCount - 2;
+           }else{
+              grid[row][column + 1].hasRobot = 1;
+              grid[row][column].hasRobot = 0;
+              grid[row][column + 1].robAlive = 1;
+              grid[row][column].robAlive = 0;
+              grid[row][column + 1].robHeading = 2;
+           }
+          }
+           break;
+         case 3: //Pointing south
+          if(row < 9) {
+             if(grid[row + 1][column].hasRobot == 1){
+              grid[row + 1][column].robAlive = 0;
+              grid[row][column].robAlive = 0;
+              liveCount = liveCount - 2;
+           }else{
+              grid[row + 1][column].hasRobot = 1;
+              grid[row][column].hasRobot = 0;
+              grid[row + 1][column].robAlive = 1;
+              grid[row][column].robAlive = 0;
+              grid[row + 1][column].robHeading = 3;
+           }
+          }
+           break;
+
+         default: // Shouldn't happen
+          break;
+
+          printf("Robot go forward ");
+
+        }
+       }
+      }
+
+     }  while (liveCount > 0);
+
+        return 0;
+
+}
