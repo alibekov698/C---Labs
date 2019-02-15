@@ -1,0 +1,41 @@
+/*Task 1
+Files
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    FILE *outfile;
+    outfile = fopen("Log.txt", "w");
+
+    if(outfile == NULL){
+        printf("Problem with opening");
+        return 1;
+    }
+
+    char name[256], n;
+    int age;
+    while(1) {
+
+        printf("You entered name = \0");
+        scanf("%s, ", name);
+
+        if(name[0] == 'q' && strlen(name) == 1){
+            break;
+        }
+
+        fprintf(outfile, "You entered name = \0");
+        fprintf(outfile, "%s,", name);
+        printf("age = ");
+        fprintf(outfile, " age = ");
+        scanf("%i", &age);
+        fprintf(outfile, "%i.", age);
+        fprintf(outfile, " Successful.\n");
+
+    }
+
+    fclose(outfile);
+
+    return 0;
+}
