@@ -1,0 +1,35 @@
+/*Task 1
+Maximum element*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int max_element(int a[],int size){
+    int x = -10000000;
+    int i;
+    for (i = 0; i < a[size]; i++){
+        if(a[i] > x){
+                x = a[i];
+        }
+    }
+return x;
+}
+
+int main() {
+
+    int arr[12];
+    int i, j, range = 11;
+    int max, min;
+    srand(time(NULL));
+
+    for(j=0; j<12; j++) {
+        i = (rand() % range);
+            arr[j]=i;
+    }
+    for(i=0; i<12; i++) {
+        printf("%i ", arr[i]);
+    }
+
+    printf("\nMaximum number: %i\n", max_element(arr, 12));
+
+    return 0;
+}
