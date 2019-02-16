@@ -1,0 +1,25 @@
+/*Task 2
+Pretty printing*/
+#include<stdio.h>
+#include<math.h>
+
+void printArray (int arr[5]) {
+
+    int i;
+    printf("%c", '[');
+    for (i = 0; i < 5; i++) {
+        printf("%i", arr[i]);
+        if (arr[i] != 5){
+            printf("%c", ',');
+        }
+    }
+}
+
+int main () {
+
+    int vals [5] = {1, 2, 3, 4, 5};
+
+    printArray(vals);
+    printf("%c", ']');
+    return 0;
+}
