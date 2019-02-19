@@ -1,0 +1,35 @@
+// Task 3 (Pointers)
+#include <stdio.h>
+int main () {
+
+    int a = 11, b = 20; // Declare a and b.
+    int x, y;
+
+    int *ip1 = &a;// address location in memory (*ip1) of variable 'a'.
+    int *ip2 = &x;// address location in memory (*ip2) of variable 'x'.
+
+    int **ipp = &ip2;// address location in memory (**ipp) of address *ip2 of variable 'x'.
+
+    *ip2 = *ip1 * 7 + b;// The (*ip2) changed on 97 because *ip1=11 and adding 20.
+
+    ip1 = ip2;// The address of ip1 is changed on ip2.
+    ip2 = &y;// The ip2 takes in memory new address location of the variable 'y'.
+
+    **ipp = 88;// The memory of **ipp is changed on integer 88, and declared y = 88;
+    *ipp = &b;// The memory of *ipp is changed from 88 on 20;
+
+    return 0;
+}
+/*Answers:
+*   a = 11;
+*   b = 20;
+*   x = 97;
+*   y = 88;
+*   ip1 = some address;
+*   ip2 = some address;
+*   ipp = some address;
+*   *ip1 = 97;
+*   *ip2 = 20;
+*   *ipp = some address;
+*   **ipp = 20;
+*/
