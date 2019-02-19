@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int maxValue (int from, int to, int arr[]) {
+    if(from == to) {
+        return arr[from];
+    }
+    if(arr[from] > maxValue(arr, from + 1, to)) {
+        return arr[from];
+    }
+}
