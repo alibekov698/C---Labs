@@ -1,0 +1,30 @@
+//Task 2 (Strings)
+#include <stdio.h>
+#include <string.h>
+
+int stringCmp(char string1[], char string2[]) {
+    int bigger = 1, same = 0, less = -1;
+    int i;
+
+    for(i = 0; string1[i] != '\0' || string2[i] != '\0'; i++) {
+        if(string1[i] < string2[i]) {
+            return less;
+        }
+        else if(string1[i] > string2[i]) {
+            return bigger;
+        }
+        else if(string1[i] == string2[i]) {
+            continue;
+        }
+    }
+}
+
+int main() {
+    char str1[256], str2[256];
+    scanf("%s %s", str1, str2);
+
+    int i = stringCmp(str1, str2);
+
+    printf("%i", i);
+    return 0;
+}
