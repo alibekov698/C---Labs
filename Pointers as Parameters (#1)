@@ -1,0 +1,17 @@
+void flipper(char *a, char *b, char *c) {
+	char val = *a;
+	*a = *b; *b = *c;
+	*c = val;
+}
+
+int main() {
+
+	char word[] = "abcdefg";
+
+	int i;
+	for (i = 0; i < 5; i++) {
+		flipper(&word[i], &word[i+1], &word[i+2]);
+	}
+
+    return 0;
+}
