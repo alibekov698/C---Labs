@@ -1,0 +1,53 @@
+//Lesson #26
+//Practice Exercise_1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct _charNode {
+    char ch;
+    struct _charNode *link;
+} charNode;
+
+void printList (charNode *node) {
+    if (node != NULL) {
+    printf("%c ", node->ch);
+    printList(node->link);
+    }
+}
+
+void printReverseList (charNode *node) {
+    if (node != NULL) {
+    printReverseList(node->link);
+    printf("%c ", node->ch);
+    }
+}
+
+int main () {
+    charNode *first = NULL;
+    charNode *prev = NULL;
+
+    int i = 0;
+
+    while(i < 26) {
+        charNode *newNode = (charNode*)malloc(sizeof(charNode));
+
+        newNode->ch = 'a' + i;
+        newNode->link = NULL;
+
+        if (first == NULL) {
+        first = newNode;
+        } else {
+        prev->link = newNode;
+        }
+
+        prev = newNode;
+        i++;
+    }
+
+    printList(first);
+    printf("\n");
+    printReverseList(first);
+
+    return 0;
+}
