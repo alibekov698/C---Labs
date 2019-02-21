@@ -1,0 +1,19 @@
+//Lesson #25
+//Exercise_1
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+char* stringCopy(char *fromStr){
+    char *Strcopy = (char*)malloc(strlen(fromStr)*sizeof(char));
+    for(int i = 0; i < strlen(fromStr); i++){
+    *(Strcopy+i) = *(fromStr+i);
+    }
+    return Strcopy;
+}
+
+int main(){
+    char str[] = {"Hello"};
+    printf("%s", stringCopy(str));
+    return 0;
+}
